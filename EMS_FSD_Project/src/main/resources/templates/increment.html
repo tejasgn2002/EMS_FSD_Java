@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Increment Employee</title>
+	<style>
+	        table {
+	            border-collapse: collapse;
+	            width: 50%;
+	        }
+	        th, td {
+	            border: 1px solid black;
+	            padding: 8px;
+	            text-align: center;
+	        }
+	 </style>
+</head>
+<body>
+
+<h2>Increment Employee</h2>
+
+<form th:action="@{/home/increment/hike}" method="get" th:unless="${employee}">
+	Id: <input name="id" type="number" required><br><br>
+	<input type="submit" value="Search">
+</form>
+
+<table th:if="${employee}">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+			<th>Designation</th>
+			<th>Salary</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.age}"></td>
+			<td th:text="${employee.designation}"></td>
+			<td th:text="${employee.salary}"></td>
+        </tr>
+    </tbody>
+</table><br>
+<form th:action="@{/home/increment}" method="post" th:if="${employee}">
+	Id: <input name="id" type="number" required><br><br>
+	Increment: <input name="increment" placeholder="1-10%" type="number" required><br><br>
+	<input type="submit" value="Update">
+</form>
+
+<span th:if="${error}" th:text="${error}" style="color: red;"></span>
+<span th:if="${success}" th:text="${success}" style="color: green;"></span><br>
+
+
+<a th:href="@{/home}">Back to Home</a>
+</body>
+</html>

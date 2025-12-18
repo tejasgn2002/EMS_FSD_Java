@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Display Employee</title>
+	<style>
+	        table {
+	            border-collapse: collapse;
+	            width: 50%;
+	        }
+	        th, td {
+	            border: 1px solid black;
+	            padding: 8px;
+	            text-align: center;
+	        }
+	 </style>
+</head>
+<body>
+
+<h2>Display Employee</h2>
+
+<table th:if="${employees}">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+			<th>Designation</th>
+			<th>Salary</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.age}"></td>
+			<td th:text="${employee.designation}"></td>
+			<td th:text="${employee.salary}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<span th:unless="${employees}"> No Data Found...</span><br><br>
+
+<a th:href="@{/home}">Back to Home</a>
+</body>
+</html>
