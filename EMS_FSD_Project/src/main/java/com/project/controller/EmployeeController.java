@@ -84,7 +84,7 @@ public class EmployeeController {
 		}
 		
 		List<Employee> employees = service.fetchAllEmployee();
-		model.addAttribute("employees", employees);
+		if(!employees.isEmpty()) model.addAttribute("employees", employees);
 		return "display";
 	}
 	
@@ -115,6 +115,10 @@ public class EmployeeController {
 	public String percentageOfHikeForEmployee(@RequestParam int id,@RequestParam int increment,HttpSession session,Model model) {
 		
 		Optional<Employee> byId = service.fetchById(id);
+		if(byId.isEmpty()) {
+			model.addAttribute("error", "Id:"+id+" not found");
+			return "increment";
+		}
 		if(!(increment > 0 && increment <= 10)) {
 			model.addAttribute("error", "Salary increment should be 1% to 10%");
 			return "increment";
